@@ -1,11 +1,12 @@
 package com.example.Module2.controllers;
 
 
+import com.example.Module2.dto.EmployeeDTO;
 import com.example.Module2.entities.EmployeeEntity;
-import com.example.Module2.repository.EmployeeRepository;
+import com.example.Module2.services.EmployeeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -17,32 +18,32 @@ public class EmployeeController {
 //        return "asd1212739";
 //    }
 
-    final private EmployeeRepository employeeRepository;
+    final private EmployeeService employeeService;
 
-    public EmployeeController(EmployeeRepository employeeRepository) {
-        this.employeeRepository = employeeRepository;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
     }
 
     @GetMapping(path = "getEmployeeById/{employeeId}")
-    public EmployeeEntity getEmployeeById(@PathVariable(name = "employeeId") Long Id) {
-        return employeeRepository.findById(Id).orElse(null);
+    public EmployeeDTO getEmployeeById(@PathVariable(name = "employeeId") Long Id) {
+        return employeeService.getEmployeeById(Id);
     }
 
     @GetMapping(path = "getAllEmployee")
-    public List<EmployeeEntity> getAllEmployee(@RequestParam(required = false) Long id,
+    public List<EmployeeDTO> getAllEmployee(@RequestParam(required = false) Long id,
                                                @RequestParam(required = false) String name) {
-        return employeeRepository.findAll();
+        return employeeService.getAllEmployee();
     }
 
     @PostMapping(path = "addEmployee")
-    public EmployeeEntity createEmployee(@RequestBody EmployeeEntity employeeEntity) {
+    public EmployeeDTO createEmployee(@RequestBody EmployeeDTO employeeDTO) {
         System.out.println("Employee Create Successfully");
-        return employeeRepository.save(employeeEntity);
+        return employeeService.createEmployee(employeeDTO);
     }
 
     @DeleteMapping(path = "deleteEmployee/{employeeId}")
-    public void deleteEmployeeById(@PathVariable Long employeeId) {
+    public void deleteEmployeeById(@PathVariable(name = "employeeId") Long Id) {
         System.out.println("Employee Deleted");
-        employeeRepository.deleteById(employeeId);
+        employeeService.deleteEmployeeById(Id);
     }
 }
