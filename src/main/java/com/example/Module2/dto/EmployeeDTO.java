@@ -1,7 +1,16 @@
 package com.example.Module2.dto;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import java.time.LocalDate;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EmployeeDTO {
 
     private Long id;
@@ -13,56 +22,4 @@ public class EmployeeDTO {
     private Boolean active;
 
     private LocalDate dateOfJoining;
-
-    public EmployeeDTO() {
-
-    }
-
-    public EmployeeDTO(Long id, String name, String email, Boolean active, LocalDate dateOfJoining) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.active = active;
-        this.dateOfJoining = dateOfJoining;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Boolean getActive() {
-        return active;
-    }
-
-    public void setActive(Boolean active) {
-        this.active = active;
-    }
-
-    public LocalDate getDateOfJoining() {
-        return dateOfJoining;
-    }
-
-    public void setDateOfJoining(LocalDate dateOfJoining) {
-        this.dateOfJoining = dateOfJoining;
-    }
 }

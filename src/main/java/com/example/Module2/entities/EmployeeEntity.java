@@ -29,4 +29,7 @@ public class EmployeeEntity {
     private Boolean active;
 
     private LocalDate dateOfJoining;
+
+    public void set() {
+    }
 }
