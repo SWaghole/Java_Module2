@@ -26,10 +26,13 @@ public class EmployeeEntity {
 
     private String email;
 
+    private Integer age;
+
+    private String role;
+
+    private Double salary;
+
     private Boolean active;
 
     private LocalDate dateOfJoining;
-
-    public void set() {
-    }
 }

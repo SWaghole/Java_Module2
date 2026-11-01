@@ -2,11 +2,11 @@ package com.example.Module2.services;
 
 import com.example.Module2.dto.EmployeeDTO;
 import com.example.Module2.entities.EmployeeEntity;
+import com.example.Module2.exception.ResourceNotFoundException;
 import com.example.Module2.repository.EmployeeRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.util.ReflectionUtils;
 import org.springframework.stereotype.Service;
-
 import java.lang.reflect.Field;
 import java.util.List;
 import java.util.Map;
@@ -49,6 +49,7 @@ public class EmployeeService {
     }
 
     public EmployeeDTO updateEmployeeUsingId(Long Id, EmployeeDTO employeeDTO) {
+        isExistsByEmployeeId(Id);
         EmployeeEntity employeeEntity = modelMapper.map(employeeDTO, EmployeeEntity.class);
         employeeEntity.setId(Id);
         EmployeeEntity savedEmployeeEntity = employeeRepository.save(employeeEntity);
@@ -57,7 +58,7 @@ public class EmployeeService {
 
     public void isExistsByEmployeeId(Long employeeId) {
         boolean exist = employeeRepository.existsById(employeeId);
-        if(!exist) throw new RuntimeException("Employee not found " + employeeId);
+        if(!exist) throw new ResourceNotFoundException("Employee not found " + employeeId);
     }
 
     public EmployeeDTO updatePartialEmployeeById(Long employeeId, Map<String, Object> updates) {

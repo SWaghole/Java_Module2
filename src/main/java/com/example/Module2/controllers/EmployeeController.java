@@ -1,12 +1,17 @@
 package com.example.Module2.controllers;
 
 import com.example.Module2.dto.EmployeeDTO;
+import com.example.Module2.exception.ResourceNotFoundException;
 import com.example.Module2.services.EmployeeService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @RestController
@@ -28,7 +33,7 @@ public class EmployeeController {
     public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(name = "employeeId") Long Id) {
         Optional<EmployeeDTO> employeeDTO = employeeService.getEmployeeById(Id);
         return employeeDTO.map(employeeDTO1 -> ResponseEntity.ok(employeeDTO1))
-                .orElseThrow(() -> new RuntimeException("Employee not found with id: "+Id));
+                .orElseThrow(() -> new ResourceNotFoundException("Employee Not Found"));
     }
 
     @GetMapping(path = "getAllEmployee")
@@ -38,7 +43,7 @@ public class EmployeeController {
     }
 
     @PostMapping(path = "addEmployee")
-    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<EmployeeDTO> createEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
         EmployeeDTO savedEmployee = employeeService.createEmployee(employeeDTO);
         return new ResponseEntity<>(savedEmployee, HttpStatus.CREATED);
     }
