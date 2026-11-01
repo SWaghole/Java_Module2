@@ -1,8 +1,6 @@
 package com.example.Module2.dto;
 
 import com.example.Module2.annotations.EmployeeRoleValidation;
-import com.example.Module2.annotations.Password;
-import com.example.Module2.annotations.PrimeNumber;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

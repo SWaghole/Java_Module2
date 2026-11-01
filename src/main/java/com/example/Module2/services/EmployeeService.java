@@ -16,8 +16,8 @@ import java.util.stream.Collectors;
 @Service
 public class EmployeeService {
 
-    public final EmployeeRepository employeeRepository;
-    public final ModelMapper modelMapper;
+    final public EmployeeRepository employeeRepository;
+    final public ModelMapper modelMapper;
 
     public EmployeeService(EmployeeRepository employeeRepository, ModelMapper modelMapper) {
         this.modelMapper = modelMapper;
